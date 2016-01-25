@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script type="text/javascript" src="js/userdefined/TestProvider.js"></script>
+<script type="text/javascript">
+var module=angular.module("NextModule",["testModule"])
+.config(function(testServiceProvider) {
+	testServiceProvider.setMessage("Welcome");
+})
+module.controller("NextController", function(testService,$scope) {
+	$scope.message=testService.getMessage("Rajesh");
+});
+</script>
+</head>
+<body ng-app="NextModule" ng-controller="NextController">
+{{message}}
+</body>
+</html>

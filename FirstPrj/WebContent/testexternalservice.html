@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script  src="js/angular.min.js"></script>
+<script  src="js/userdefined/ServiceModule.js"></script>
+<script  src="js/userdefined/MessageModule.js"></script>
+<script>
+var testModule=angular.module("TestApp",["ServiceMod","MessageMod"]);
+testModule.controller("testController", function($scope,EmployeeService,TestService) {
+	$scope.employees=EmployeeService.getData();
+	$scope.message=TestService.getMessage()+" "+TestService.getNextMessage();
+	$scope.calculateSum=function(){
+		$scope.sum=TestService.add($scope.number1,$scope.number2);
+	};	
+});
+</script>
+</head>
+<body ng-app="TestApp" ng-controller="testController">
+<ul type="square">
+<li ng-repeat="emp in employees">
+{{emp.id}} {{emp.name}} {{emp.designation}}
+</li>
+</ul>
+<div>
+{{message}}
+</div>
+First Number <input type="number" ng-model="number1">
+<br>
+Second Number <input type="number" ng-model="number2">
+<br>
+<button ng-click="calculateSum()">Add</button>
+<br>
+Sum is {{sum}}
+
+
+</body>
+</html>

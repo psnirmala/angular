@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<style type="text/css">
+img{
+width: 100px;
+height: 80px;
+}
+</style>
+<script src="js/angular.min.js"></script>
+<script>
+var module=angular.module("LoginApp",[]);
+module.controller("loginController", function($scope) {
+	$scope.image="Desert";
+});
+</script>
+</head>
+<body ng-app="LoginApp" ng-controller="loginController">
+Select the image 
+<select ng-model="image">
+<option value="Desert">Desert</option>
+<option value="Koala">Koala</option>
+<option value="Lighthouse">Light House</option>
+<option value="Penguins">Penguins Bird</option>
+</select>
+<br>
+<img ng-src="images/{{image}}.jpg">
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<style type="text/css">
+.first{
+background-color: red;
+}
+.second{
+background-color: lime;
+}
+div{
+width: 200px;
+height: 200px;
+border: 2px solid blue;
+
+}
+</style>
+<script src="js/angular.min.js"></script>
+<script>
+var module=angular.module("TestApp",[]);
+module.controller("TestController",function($scope){
+	$scope.className="first";
+	$scope.highlight=function(){
+		$scope.className="second";
+	};
+	$scope.normalize=function(){
+		$scope.className="first";
+	}
+});
+
+</script>
+</head>
+<body ng-app="TestApp" ng-controller="TestController">
+<div  class="{{className}}" ng-mouseenter="highlight()" ng-mouseleave="normalize()">
+</div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<html>
+<head>
+<title>First Angular App</title>
+<script src="js/angular.min.js"></script>
+<script>
+var module=angular.module("FirstApp",[]);
+module.controller("FirstController",function($scope){
+	console.log("constructor of controller");
+	/*$scope.first=1;
+	$scope.second=2;*/
+	
+	$scope.number={
+		"first":1,
+		"second":2
+	};
+	
+});
+</script>
+</head>
+<body ng-app="FirstApp"  ng-controller="FirstController">
+First Number <input type="number" ng-model="number.first">
+<br>
+Second Number <input type="number" ng-model="number.second">
+<br>
+Sum {{number.first + number.second}}
+<br>
+Difference {{number.first-number.second}}
+<br>
+Product {{number.first*number.second}}
+<br>
+Quotient {{number.first/number.second}}
+<br>
+
+</body>
+</html>

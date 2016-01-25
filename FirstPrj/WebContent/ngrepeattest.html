@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<style type="text/css">
+.odd{
+background-color: aqua;
+color: red;
+}
+.even{
+background-color: lime;
+color: maroon;
+}
+.title{
+background-color: orange;
+color: black;
+}
+</style>
+
+<script src="js/angular.min.js"></script>
+<script>
+var module=angular.module("TestApp",[]);
+module.controller("testController", function($scope) {
+	$scope.employees=[
+	                  {"id":101,"name":"Arvind","designation":"Developer"},
+	                  {"id":102,"name":"Deva","designation":"Team Lead"},
+	                  {"id":103,"name":"Raghav","designation":"Architect"}
+	                  ];
+	$scope.addEmployee=function()
+	{
+		var emp={
+			"id":$scope.empId,
+			"name":$scope.empName,
+			"designation":$scope.designation
+		};
+		$scope.employees.push(emp);
+		$scope.empId="";
+		$scope.empName="";
+		$scope.designation="";
+	}
+	$scope.removeEmployee=function(currentIndex)
+	{
+		$scope.employees.splice(currentIndex,1);
+	}
+});
+</script>
+</head>
+<body ng-app="TestApp" ng-controller="testController">
+Id <input type="text" ng-model="empId">
+<br>
+Name <input type="text" ng-model="empName">
+<br>
+Designation <input type="text" ng-model="designation">
+<br>
+<button ng-click="addEmployee()">Add</button>
+<table border="2">
+<thead>
+<tr class="title"><td>Id</td><td>Name</td><td>Designation</td></tr>
+</thead>
+<tbody>
+<tr ng-repeat="e in employees" ng-class="{odd:$odd,even:$even}">
+<td>{{e.id}}</td>
+<td>{{e.name}}</td>
+<td>{{e.designation}}</td>
+<td><button ng-click="removeEmployee($index)" ng-disabled="$odd">Remove</button></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

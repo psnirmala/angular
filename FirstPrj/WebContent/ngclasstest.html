@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<style type="text/css">
+.first{
+background-color: aqua;
+}
+.second{
+color: red;
+}
+.third{
+border: 2px solid blue;
+}
+div{
+width: 200px;
+}
+
+</style>
+<script src="js/angular.min.js"></script>
+
+<script>
+var module=angular.module("TestApp",[]);
+module.controller("testController", function($scope) {
+	$scope.applyFirst=function(){
+		$scope.isFirst=true;
+	};
+	$scope.removeFirst=function(){
+		$scope.isFirst=false;
+	};
+	$scope.applySecond=function(){
+		$scope.isSecond=true;
+	};
+	$scope.removeSecond=function(){
+		$scope.isSecond=false;
+	}
+	$scope.applyThird=function(){
+		$scope.isThird=true;
+	};
+	$scope.removeThird=function(){
+		$scope.isThird=false;
+	}
+});
+</script>
+</head>
+<body ng-app="TestApp" ng-controller="testController">
+<div ng-class="{first:isFirst,second:isSecond,third:isThird}">This is  a test</div>
+<button ng-click="applyFirst()">Add First</button>
+<button ng-click="removeFirst()">Remove First</button>
+<button ng-click="applySecond()">Add Second</button>
+<button ng-click="removeSecond()">Remove second</button>
+<button ng-click="applyThird()">Add Third</button>
+<button ng-click="removeThird()">Remove Third</button>
+</body>
+</html>

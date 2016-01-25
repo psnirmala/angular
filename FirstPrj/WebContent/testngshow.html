@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+
+</style>
+<script src="js/angular.min.js"></script>
+<script>
+var module=angular.module("TestApp",[]);
+module.controller("testController", function($scope) {
+	$scope.isShown=true;
+	$scope.buttonLabel="Hide";
+	$scope.change=function(){
+		$scope.isShown=!$scope.isShown;
+		$scope.buttonLabel=$scope.isShown?"Hide":"Display";
+	}
+});
+</script>
+</head>
+<body ng-app="TestApp" ng-controller="testController">
+<div ng-if="isShown">You are seeing me</div>
+<br>
+<button ng-click="change()">{{buttonLabel}}</button>
+</body>
+</html>

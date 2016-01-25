@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="js/angular.min.js"></script>
+<script>
+var module=angular.module("LoginApp",[]);
+module.config(function(){
+	console.log("In config phase")
+});
+module.run(function($rootScope){
+	console.log("In run phase");
+	$rootScope.message="Testing life cycle";
+});
+module.controller("Controller1",function($scope){
+	$scope.message=$scope.message+" within controller1";
+});
+module.controller("Controller2",function($scope){
+	$scope.message=$scope.message+" within controller2";
+});
+</script>
+</head>
+<body ng-app="LoginApp" >
+{{message}}
+<div ng-controller="Controller1">
+{{message}}
+
+<div ng-controller="Controller2">
+{{message}}
+</div>
+
+</div>
+</body>
+</html>

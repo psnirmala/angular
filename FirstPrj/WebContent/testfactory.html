@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script type="text/javascript" src="js/userdefined/TestFactoryModule.js"></script>
+<script type="text/javascript">
+angular.module("Test",["TestFactoryModule"]).
+controller("testController", function($scope,pizzaFactory) {
+	$scope.type="v";
+	$scope.update=function(){
+		$scope.price=pizzaFactory.getPrice($scope.type);
+		$scope.description=pizzaFactory.getType($scope.type);
+	};
+	$scope.update();
+	
+});
+</script>
+<title>Insert title here</title>
+</head>
+<body ng-app="Test" ng-controller="testController">
+Select Pizza Type
+<select ng-model="type" ng-change="update()">
+<option value="v">Veg</option>
+<option value="c">Chicken</option>
+</select>
+<br>
+Type {{description}}
+<br>
+Price {{price}}
+</body>
+</html>

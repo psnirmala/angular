@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="js/angular.min.js"></script>
+<script>
+var module=angular.module("TestApp", []);
+module.service("Service1", function() {
+	this.getData=function(){
+		var data=[];
+		data.push({"id":1,"name":"Rajiv","designation":"Developer"});
+		data.push({"id":2,"name":"Arjun","designation":"Accountant"});
+		data.push({"id":3,"name":"Arvind","designation":"Developer"});
+		return data;
+	};
+	
+});
+
+module.controller("testController", function($scope,Service1) {
+	$scope.employees=Service1.getData();
+});
+
+</script>
+</head>
+<body ng-app="TestApp" ng-controller="testController">
+<ul type="square">
+<li ng-repeat="emp in employees">
+{{emp.id}} {{emp.name}} {{emp.designation}}
+</li>
+</ul>
+</body>
+</html>
