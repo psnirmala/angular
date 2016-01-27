@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-resource.min.js"></script>
+<script type="text/javascript" src="js/restresource.js"></script>
+<script type="text/javascript">
+var module=angular.module("TestRestClientApp",["RestClientModule"]);
+module.controller("ClientController", function($scope,Entry) {
+	$scope.dataAvailable=false;
+	$scope.getData=function(){
+	Entry.get({"id":$scope.empId},function(data){
+		$scope.name=data.name;
+		$scope.designation=data.designation;
+		$scope.dataAvailable=true;
+	});
+	};
+});
+</script>
+</head>
+<body ng-app="TestRestClientApp" ng-controller="ClientController">
+Employee Id <input type="text" ng-model="empId">
+<br>
+<button ng-click="getData()">Get Details</button>
+<div ng-if="dataAvailable">
+Name {{name}}
+<br>
+Designation {{designation}}
+</div>
+</body>
+</html>

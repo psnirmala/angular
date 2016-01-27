@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<base href="/TestSpaWithHTML5mode/spawithhtml5mode.html">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-route.js"></script>
+<script type="text/javascript">
+var app1=angular.module("SpaTest",["ngRoute"]);
+app1.controller("controller1",function($scope,$routeParams,$route){
+	//$locationProvider.html5Mode(true);
+	$scope.message="This is Controller Number 1";
+	$scope.idDetails="Your id is"+$routeParams.id;
+	$scope.comp=$route.current.company;
+	$scope.city=$route.current.city;
+});
+app1.controller("controller2",function($scope,$routeParams,
+		TestService,$route){
+	$locationProvider.html5Mode(true);
+	$scope.message=TestService.getMessage($routeParams.name,
+			$route.current.lastName);
+	$scope.nameDetails="Your name is "+$routeParams.name;
+});
+app1.controller("controller3",function($scope){
+	$scope.message="This is the home page";
+});
+app1.config(function($routeProvider,$locationProvider){
+	$locationProvider.html5Mode(true);
+	$routeProvider
+	.when("/first/:id",{
+		controller: "controller1",
+		templateUrl: "view/firstwithhtml5mode.html",
+		company:"Genpact",
+		city:"Bangalore"
+	
+		
+	})
+	.when("/second/:name",{
+		controller: "controller2",
+		templateUrl: "view/secondwithhtml5mode.html",
+		lastName:" David"
+	})
+	.when("/",{
+		//redirectTo: "/first"
+		controller: "controller3",
+		templateUrl: "view/homewithhtml5mode.html"
+	})
+	.otherwise({
+		redirectTo: "/"
+	});
+	
+});
+
+//service
+app1.service("ConcatService",function()
+		{
+		 this.concat=function(firstName,lastName)
+			{
+				return firstName+" "+lastName;
+			}
+		});
+
+app1.service("TestService",function(ConcatService){
+	this.getMessage=function(firstName,lastName)
+	{
+		return "Welcome "+ConcatService.concat(firstName,lastName);
+	}
+});
+
+
+</script>
+</head>
+<body ng-app="SpaTest">
+<h1 style="background-color: lime;color: maroon;">This is a single page application</h1>
+<div style="background-color: aqua;" ng-view></div>
+</body>
+</html>

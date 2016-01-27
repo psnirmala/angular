@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-resource.min.js"></script>
+<script type="text/javascript" src="js/restresource.js"></script>
+<script type="text/javascript">
+var module=angular.module("TestRestClientApp",["RestClientModule"]);
+module.controller("ClientController", function($scope,Entry) {
+	$scope.dataAvailable=false;
+	$scope.deleteEmployee=function(){
+	Entry.delete({"id":$scope.empId},
+			function(response){
+		console.log(response);
+		$scope.response="Employee deleted";
+		$scope.dataAvailable=true;
+	});
+	};
+});
+</script>
+</head>
+<body ng-app="TestRestClientApp" ng-controller="ClientController">
+Id <input type="text"  ng-model="empId">
+<button ng-click="deleteEmployee()">Add</button>
+<div ng-if="dataAvailable">{{response}}</div>
+</body>
+</html>

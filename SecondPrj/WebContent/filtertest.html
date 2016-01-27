@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script type="text/javascript" src="js/angular.min.js"></script>
+</head>
+<body  ng-app>
+Name <input type="text" ng-model="name">
+<br>
+Salary <input  type="number" ng-model="salary">
+<br>
+Welcome {{name | uppercase}}
+<br>
+Salary is {{salary | currency:"Rs"}}
+</body>
+</html>

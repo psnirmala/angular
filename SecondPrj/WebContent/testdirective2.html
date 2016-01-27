@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script type="text/javascript" src="js/directives/secondDirective.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script type="text/javascript">
+angular.module("TestApp",["directiveModule2"]).controller("TestController",function($scope){
+	$scope.city1="Bangalore";
+	$scope.state1="Karnataka";
+	
+	$scope.city2="Pune";
+	$scope.state2="Maharashtra";
+	
+});
+</script>
+</head>
+<body ng-app="TestApp"  ng-controller="TestController">
+
+<second-directive city="city1" state="state1"></second-directive>
+<br>
+<second-directive city="city2" state="state2"></second-directive>
+
+</body>
+</html>

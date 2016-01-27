@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script type="text/javascript" src="js/userdefined/AjaxService.js"></script>
+<script type="text/javascript">
+angular.module("testApp", ["ServiceModule"]).
+controller("testController",function($scope,AjaxService){
+	$scope.getData=function(){
+		var promise=AjaxService.getCustomerData();
+		promise.then(function(response){
+			$scope.customer=response.data;
+		});
+		
+	};
+});
+</script>
+</head>
+<body ng-app="testApp" ng-controller="testController">
+<button ng-click="getData()">Get Data From Server</button>
+<br>
+Id {{customer.id}}
+<br>
+Name {{customer.name}}
+<br>
+Balance {{customer.balance}}
+</body>
+</html>

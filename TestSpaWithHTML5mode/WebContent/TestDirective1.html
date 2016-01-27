@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.js"></script>
+<script type="text/javascript">
+var testApp=angular.module("DirectiveApp",[]);
+testApp.directive("testDirective",function(){
+	var dir={};
+	dir.restrict="E";
+	dir.template="This is user defined Directive. Message: {{message}}";
+	return dir;
+});
+
+testApp.controller("firstController",function($scope){
+	$scope.message="Thank you";
+	$scope.nextMessage="Testing Attribute Directive";
+});
+
+testApp.directive("testAttribute",function(){
+	var dir={};
+	dir.restrict="A";
+	dir.templateUrl="view/testDirective.html"
+	return dir;
+});
+
+
+</script>
+</head>
+<body ng-app="DirectiveApp">
+<div ng-controller="firstController">
+<test-directive></test-directive>
+<p test-attribute=""></p>
+</div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script type="text/javascript" src="js/userdefined/AjaxService.js"></script>
+<script type="text/javascript">
+angular.module("testApp", ["ServiceModule"]).
+controller("testController",function($scope,AjaxService){
+	$scope.message="This portion will be refreshed with ajax response";
+	$scope.postData=function(){
+		var data={
+			"id":$scope.custId,
+			"name":$scope.custName
+		};
+		var promise=AjaxService.postCustomerData(data)
+		promise.then(function(response){
+			$scope.customer=response.data;
+			
+			$scope.message="successfully posted "+$scope.customer.id+" and "+$scope.customer.name;
+		},function(error){
+			console.log("error:"+error)
+		});
+		
+	};
+});
+</script>
+</head>
+<body ng-app="testApp" ng-controller="testController">
+Id <input type="text" ng-model="custId">
+<br>
+Name <input type="text" ng-model="custName">
+<br>
+<button ng-click="postData()">Post Data</button>
+<div>{{message}}</div>
+</body>
+</html>

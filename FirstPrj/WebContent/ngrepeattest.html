@@ -23,7 +23,7 @@ color: black;
 var module=angular.module("TestApp",[]);
 module.controller("testController", function($scope) {
 	$scope.employees=[
-	                  {"id":101,"name":"Arvind","designation":"Developer"},
+	                  {"id":101,"name":"Sathish","designation":"Developer"},
 	                  {"id":102,"name":"Deva","designation":"Team Lead"},
 	                  {"id":103,"name":"Raghav","designation":"Architect"}
 	                  ];
@@ -59,7 +59,7 @@ Designation <input type="text" ng-model="designation">
 <tr class="title"><td>Id</td><td>Name</td><td>Designation</td></tr>
 </thead>
 <tbody>
-<tr ng-repeat="e in employees" ng-class="{odd:$odd,even:$even}">
+<tr ng-repeat="e in employees |orderBy: '-name'" ng-class="{odd:$odd,even:$even}">
 <td>{{e.id}}</td>
 <td>{{e.name}}</td>
 <td>{{e.designation}}</td>

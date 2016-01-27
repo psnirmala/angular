@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script type="text/javascript" src="js/userdefined/AjaxService.js"></script>
+<script type="text/javascript">
+angular.module("testApp", ["ServiceModule"]).
+controller("testController",function($scope,AjaxService){
+	$scope.dataAvailable=false;
+	$scope.getData=function(){
+		var promise=AjaxService.getCustomerListData();
+		promise.then(function(response){
+			$scope.customers=response.data;
+			$scope.dataAvailable=true;
+		});
+		
+	};
+});
+</script>
+</head>
+<body data-ng-app="testApp" data-ng-controller="testController">
+<button ng-click="getData()">Get Data From Server</button>
+<br>
+<table border="2" ng-if="dataAvailable">
+<thead><tr><th>Id</th><th>Name</th><th>Designation</th></tr></thead>
+<tbody>
+<tr ng-repeat="cust in customers">
+<td>{{cust.id}}</td>
+<td>{{cust.name}}</td>
+<td>{{cust.balance|currency:"Rs"}}
+</tr>
+</tbody>
+</table>
+</body>
+</html>
