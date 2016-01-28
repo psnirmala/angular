@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="js/angular.min.js"></script>
+<script src="js/angular-resource.min.js"></script>
+<script type="text/javascript">
+var module=angular.module("mainApp",["ngResource"]);
+module.factory("Entry",function($resource){
+	return $resource("rest/employee/:id"
+			,{ id: '@_id' }, {
+	    update: {
+	        method: 'PUT' // this method issues a PUT request
+	      }
+	    });
+});
+module.controller("testController",function($scope,Entry){
+	$scope.getData=function()
+	{
+		/*console.log($scope.empId);
+	var entry=Entry.get({id:$scope.empId},function(data){
+		console.log(data.name+" "+data.designation);
+		$scope.empData="Name: "+data.name;
+		$scope.empData+=" Designation: "+data.designation;
+	});*/
+	/*var entries=Entry.query(function(){
+		console.log(entries);
+		for(var i=0;i<entries.length;i++){
+			console.log(entries[i].id+" "+entries[i].name+" "+entries[i].designation);
+		}
+	});*/
+	/*Entry.save({"name":"xxx","designation":"yyyy"},function(){
+		console.log("posted");
+	});*/
+	Entry.delete({"id":104},function(d){
+		console.log("updated");
+		//console.log(d);
+		/*d.then(function(response){
+			console.log(response.data);
+		});*/
+	});
+	/*entries.then(function(data){
+		console.log(data);
+	});*/
+	};
+});
+</script>
+</head>
+<body ng-app="mainApp" ng-controller="testController">
+Employee id <input type="text" ng-model="empId">
+<br>
+<button ng-click="getData()">Get Details</button>
+<div>{{empData}}</div>
+</body>
+</html>
