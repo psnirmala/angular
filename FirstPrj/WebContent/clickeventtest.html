@@ -6,19 +6,24 @@
 <script src="js/angular.min.js"></script>
 <script>
 var module=angular.module("LoginApp",[]);
-module.controller("loginController", function($scope) {
+module.controller("loginController", function($scope,$timeout) {
+	console.log("outside validate "+$scope.$id);
+	alert("starting timer");
 	$scope.validate=function(){
+		//console.log("within validate "+$scope.$id);
+		$timeout(function(){
 		if($scope.user=="user1"&&$scope.password=="pass1"){
 			alert("valid user");
 		}
 		else{
 			alert("invalid user");
 		}
+		},5000);
 	};
 });
 </script>
 </head>
-<body ng-app="LoginApp" ng-controller="loginController">
+<body ng-app="LoginApp"  ng-controller="loginController">
 Username <input type="text" ng-model="user">
 <br>
 Password <input type="password"  ng-model="password">
